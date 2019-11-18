@@ -1,0 +1,48 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        {{pageTitle}}
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-2">{{subm?"Search By:":"Filter By:"}} </div>
+            <div class="col-md-4">
+                <input type="text" [(ngModel)] = "SearchFilter" [placeholder]="exemple" (focus)="placeholderChange()" (blur)="placeholderChange()" *ngIf = "subm">
+                <input type="text" *ngIf = "!subm" [(ngModel)] = "listeFilter">
+                <button (click) ="submit()">{{subm?"Search By":"New Search"}}</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Filtred by: {{listeFilter}}</h3>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table" *ngIf = "filteredProducts">
+                <thead>
+                    <tr>
+                        <th>
+                            <button class="btn btn-primary" (click) = "toogleImage()">
+                                    {{showImage?"hide":"show"}} image
+                                                </button>
+                        </th>
+                        <th>Product</th>
+                        <th>Code</th>
+                        <th>Available</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor = "let product of filteredProducts">
+                        <td>
+                            <img *ngIf = "showImage" [src]="product.imageUrl"/>
+                        </td>
+                        <td>{{product.productName}}</td>
+                        <td>{{product.productCode}}</td>
+                        <td>{{product.releaseDate}}</td>
+                        <td>{{product.price}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
